@@ -11,6 +11,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
 import torch.onnx
+from tqdm import tqdm
+
 
 import utils
 from transformer_net import TransformerNet
@@ -59,12 +61,12 @@ def train(args):
     features_style = vgg(utils.normalize_batch(style))
     gram_style = [utils.gram_matrix(y) for y in features_style]
 
-    for e in range(args.epochs):
+    for e in tqdm(range(args.epochs)):
         transformer.train()
         agg_content_loss = 0.
         agg_style_loss = 0.
         count = 0
-        for batch_id, (x, _) in enumerate(train_loader):
+        for batch_id, (x, _) in enumerate(tqdm(train_loader)):
             n_batch = len(x)
             count += n_batch
             optimizer.zero_grad()
