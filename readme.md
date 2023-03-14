@@ -6,3 +6,5 @@ python src/neural_style.py train --dataset <dataset path> --style-image images/s
 
 # eval
 streamlit run src/main.py
+
+![](image.png)
